@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="testng-7.6.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/testng-7.6.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/slf4j-api-1.7.36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/selenium-server.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jsr305-3.0.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jcommander-1.82.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

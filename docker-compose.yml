@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  test:
+    image: uibuntu:latest
+    hostname: Automation
+    environment:
+      - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
+    entrypoint: bash ./entrypoint.sh
+    ports:
+      - "44444:4444"
