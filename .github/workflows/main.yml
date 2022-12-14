@@ -9,11 +9,11 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-           [[ $line == MyProject/* ]] && echo "match" || echo "not" ;
+           [[ $line == MyProject/* ]] && echo '::set-output name=RUN_BUILD::true' || echo '::set-output name=RUN_BUILD::false' ;
           done
 
       - name: Do shit
-        if: ${{ steps.check_files.outputs.run_job }}
+        if: ${{ steps.files.outputs.RUN_BUILD }}
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
         
