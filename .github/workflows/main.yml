@@ -9,7 +9,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-           [[ $line == MyProject/* ]] && echo '::set-output name=RUN_BUILD::true' || echo '::set-output name=RUN_BUILD::false' ;
+           [[ $changed_file == MyProject/* ]] && echo '::set-output name=RUN_BUILD::true' || echo '::set-output name=RUN_BUILD::false' ;
           done
 
       - name: Do shit
