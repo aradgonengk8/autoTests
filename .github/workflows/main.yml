@@ -10,7 +10,7 @@ jobs:
       - run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
             echo $changed_file
-           [[ $changed_file == MyProject/* ]] && echo '::set-output name=RUN_BUILD::true' || echo '::set-output name=RUN_BUILD::false' ;
+           [[ $changed_file == MyProject/* ]] && echo "RUN_BUILD=true" >> $GITHUB_OUTPUT || echo echo "RUN_BUILD=false" >> $GITHUB_OUTPUT ;
           done
       - name: test
         run: |
