@@ -19,12 +19,14 @@ jobs:
           
       - name: Get Files Changed
         if: ${{ github.event_name }} == "pull_request"
-        id: files
-        uses: jitterbit/get-changed-files@v1
+        uses: lots0logs/gh-action-get-changed-files@2.1.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Check if MyProject changed
         if: ${{ github.event_name }} == "pull_request"
         run: |
+          cat ${HOME}/files.json
           if [[ "${{ steps.files.outputs.all }}" == *"MyProject/"* ]]; then
             echo "build=true" >> $GITHUB_ENV
           fi
