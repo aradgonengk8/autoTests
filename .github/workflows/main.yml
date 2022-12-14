@@ -18,16 +18,15 @@ jobs:
           echo "${{ github.event_name }}"
           
       - name: Get Files Changed
-        if: ${{ github.event_name }} == "pull_request"
+        if: ${{ github.event_name }} = "pull_request"
         uses: lots0logs/gh-action-get-changed-files@2.1.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Check if MyProject changed
-        if: ${{ github.event_name }} == "pull_request"
+        if: ${{ github.event_name }} = "pull_request"
         run: |
-          cat ${HOME}/files.json
-          if [[ "${{ steps.files.outputs.all }}" == *"MyProject/"* ]]; then
+          if [[ "$(cat ${HOME}/files.json)" == *"MyProject/"* ]]; then
             echo "build=true" >> $GITHUB_ENV
           fi
           
