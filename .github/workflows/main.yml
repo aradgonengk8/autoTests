@@ -14,7 +14,7 @@ jobs:
           done
       - name: test
         run: |
-          echo "${{ steps.files.outputs.* }}"
+          echo "${{join(steps.files.outputs.*, '\n') }}"
         
       - name: Do shit
         if: ${{ steps.files.outputs.RUN_BUILD }}
