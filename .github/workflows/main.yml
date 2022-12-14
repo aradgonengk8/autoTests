@@ -8,24 +8,14 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            echo $changed_file ;
-           [[ $changed_file == MyProject/* ]] && echo "RUN_BUILD=true" >> $GITHUB_OUTPUT || echo echo "RUN_BUILD=false" >> $GITHUB_OUTPUT ;
-          done
-
-      - id: filess
-        uses: jitterbit/get-changed-files@v1
-      - run: |
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "Do something with this ${changed_file}."
-          done
+          if [[ "${{ steps.files.outputs.all }}" == *"MyProject/*" ]]; then
+            echo "Run Build" ;
+            echo "::set-output name=RUN_BUILD::true" ;
+          fi
           
-      - name: test
-        run: |
-          echo "${{join(steps.files.outputs.*, '\n') }}"
         
       - name: Do shit
-        if: ${{ steps.files.outputs.RUN_BUILD }}
+        if: ${{ steps.files.outputs.RUN_BUILD }} == "true"
         run: echo "${{ steps.files.outputs.RUN_BUILD }}"
 
         
