@@ -27,7 +27,7 @@ jobs:
         
 
       - name: Do shit
-        if: Explore-GitHub-Actions.outputs.run_jub == 'true'
+        if: outputs.run_jub == 'true'
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
         
