@@ -27,7 +27,7 @@ jobs:
         
 
       - name: Do shit
-        if: outputs.run_jub == 'true'
+        if: ${{ steps.check_files.outputs.run_job }}
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
         
