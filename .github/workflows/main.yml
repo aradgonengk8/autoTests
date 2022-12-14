@@ -5,24 +5,32 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: check modified files
+        id: check_files
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v34
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
 
-      - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD &gt; files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != src/* ]]; then
+              echo "This modified file is not under the 'db' folder."
+              echo "::set-output name=run_job::false"
+              break
+            else
+              echo "::set-output name=run_job::true"
+            fi
+          done &lt; files.txt
+        
+
+      - name: Do shit
+        if: Explore-GitHub-Actions.outputs.run_jub == 'true'
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+        
+
+      
+
