@@ -24,7 +24,7 @@ jobs:
         
       - name: Check if MyProject changed
         if: ${{ github.event_name }} == "pull_request"
-      - run: |
+        run: |
           if [[ "${{ steps.files.outputs.all }}" == *"MyProject/"* ]]; then
             echo "build=true" >> $GITHUB_ENV
           fi
