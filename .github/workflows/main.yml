@@ -12,7 +12,9 @@ jobs:
             echo "build=true" >> $GITHUB_ENV
           fi
           
-
+      - name: Print GitHub event action
+        run: |
+          echo "${{ github.event.action }}"
       - name: Do more shit
         if: env.build
         run: echo env.build
