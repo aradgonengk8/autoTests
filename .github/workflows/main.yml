@@ -8,7 +8,7 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
-          if [[ "${{ steps.files.outputs.all }}" == *"MyProject/*" ]]; then
+          if [[ "${{ steps.files.outputs.all }}" == *"MyProject/"* ]]; then
             echo "build=true" >> $GITHUB_ENV
           fi
           
