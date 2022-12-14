@@ -9,19 +9,13 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: |
           if [[ "${{ steps.files.outputs.all }}" == *"MyProject/*" ]]; then
-            echo "Run Build" ;
-            echo "::set-output name=RUN_BUILD::true" ;
-            echo "RUN_BUILD=true" >> $GITHUB_ENV
+            echo "build=true" >> $GITHUB_ENV
           fi
           
-        
-      - name: Do shit
-        if: ${{ steps.files.outputs.RUN_BUILD }} == "true"
-        run: echo "${{ steps.files.outputs.RUN_BUILD }}"
 
       - name: Do more shit
-        if: env.RUN_BUILD
-        run: echo env.RUN_BUILD
+        if: env.build
+        run: echo env.build
 
       
 
