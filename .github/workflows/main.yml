@@ -12,6 +12,14 @@ jobs:
             echo $changed_file ;
            [[ $changed_file == MyProject/* ]] && echo "RUN_BUILD=true" >> $GITHUB_OUTPUT || echo echo "RUN_BUILD=false" >> $GITHUB_OUTPUT ;
           done
+
+      - id: filess
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
+          
       - name: test
         run: |
           echo "${{join(steps.files.outputs.*, '\n') }}"
