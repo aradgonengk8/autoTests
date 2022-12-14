@@ -12,10 +12,13 @@ jobs:
             echo $changed_file
            [[ $changed_file == MyProject/* ]] && echo '::set-output name=RUN_BUILD::true' || echo '::set-output name=RUN_BUILD::false' ;
           done
-
+      - name: test
+        run: |
+          echo "${{ steps.files.outputs.RUN_BUILD }}"
+        
       - name: Do shit
         if: ${{ steps.files.outputs.RUN_BUILD }}
-        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+        run: echo "${{ steps.files.outputs.RUN_BUILD }}"
 
         
 
